@@ -1,0 +1,93 @@
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Usuarios</h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>usuario</th>
+                            <th>id_perfil</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let usuario of ListUsuarios">
+                            <td> {{usuario.idusuario}}</td>
+                            <td> {{usuario.nombre}}</td>
+                            <td>{{usuario.apellido}}</td>
+                            <td>{{usuario.usuario}}</td>
+                            <td>{{usuario.id_perfil}}</td>
+                            <td>
+                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="selectUsuario(usuario)">Editar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Crear Usuario </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TODO: Modals -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 *ngIf="!isUpdate" class="modal-title fs-5">Nuevo usuario</h1>
+          <h1 *ngIf="isUpdate" class="modal-title fs-5">Actualizar</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="newUsuario()"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formUsuario">
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">id Usuario</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="idusuario">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Nombre</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="nombre">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Apellido</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="apellido">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Usuario</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="usuario">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Contraseña</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="contraseña">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Perfil</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="id_perfil">
+                    </div>
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+          <button *ngIf="!isUpdate" type="button" class="btn btn-success btn-sm" (click)="saveUsuario()">Guardar</button>
+          <button *ngIf="isUpdate" type="button" class="btn btn-success btn-sm" (click)="updateUsuario()">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,95 @@
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Clientes</h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>id Cliente</th>
+                            <th>Tipo Identificacion</th>
+                            <th>identificacion</th>
+                            <th>Razon social</th>
+                            <th>fecha de registro</th>
+                            <th>estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let clientes of ListClientes">
+                            <td> {{clientes.cliente}}</td>
+                            <td> {{clientes.tipo_identificacion}}</td>
+                            <td> {{clientes.identificacion}}</td>
+                            <td>{{clientes.razon_social}}</td>
+                            <td>{{clientes.fecha_registro}}</td>
+                            <td>{{clientes.estado}}</td>
+                            <td>
+                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="selectClientes(clientes)">Editar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Crear Cliente </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TODO: Modals -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 *ngIf="!isUpdate" class="modal-title fs-5">Nuevo Cliente</h1>
+          <h1 *ngIf="isUpdate" class="modal-title fs-5">Actualizar</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="newClientes()"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formClientes">
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">id Cliente</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="cliente">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Tipo de identificacion </label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="tipo_identificacion">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">identificacion</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="identificacion">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Razon social</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="razon_social">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Fecha Registro</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="fecha_registro">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">estado</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="estado">
+                    </div>
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+          <button *ngIf="!isUpdate" type="button" class="btn btn-success btn-sm" (click)="saveClientes()">Guardar</button>
+          <button *ngIf="isUpdate" type="button" class="btn btn-success btn-sm" (click)="updateClientes()">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
